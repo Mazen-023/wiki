@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block body %}
+  <div class="ml-4">
+    <div>
+      {{ content|safe }}
+    </div>
+
+    <!-- Pass Through the entry information to the edit page -->
+    <form action="{% url 'wiki:edit' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="title" value="{{ title }}">
+      <input type="hidden" name="content" value="{{ content }}">
+      <input type="submit" value="Edit" class="btn btn-primary mt-3">
+    </form>
+  </div>
+{% endblock %}
